@@ -13,7 +13,9 @@ mongoose.connect(process.env.DB_URL);
 app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(
+  cors({ credentials: true, origin: "https://isaaczlsblog.netlify.app" }),
+);
 app.use("/user", router);
 app.use(express.static("public"));
 
