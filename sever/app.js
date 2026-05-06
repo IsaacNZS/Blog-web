@@ -14,7 +14,11 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(express.json());
 app.use(
-  cors({ credentials: true, origin: "https://isaaczlsblog.netlify.app" }),
+  cors({
+    credentials: true,
+    origin:
+      "https://isaaczlsblog.netlify.apphttps://isaac-zls-blog.onrender.com",
+  }),
 );
 app.use("/user", router);
 app.use(express.static("public"));
