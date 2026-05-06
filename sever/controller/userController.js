@@ -53,7 +53,11 @@ const login = async (req, res, next) => {
         expiresIn: "3d",
       },
     );
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      secure: true,
+      path: "/",
+      sameSite: "none",
+    });
     res.status(200).json({
       con: true,
       msg: "You Successfully logined!",
