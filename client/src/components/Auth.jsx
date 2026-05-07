@@ -39,9 +39,9 @@ const Auth = () => {
     });
     const data = await res.json();
     if (res.ok) {
-      navigate("/");
       setUserInfo(data);
       alert(data.msg);
+      navigate("/");
     } else {
       alert(data.msg);
     }

@@ -84,7 +84,7 @@ const Detailpage = ({}) => {
         <img className="w-full my-3 h-auto " src={post.img} alt="" />
         <p className="text-justify">{post.des}</p>
       </div>
-      {post.author === userInfo.name && (
+      {userInfo?.name === post.author && (
         <div className="flex justify-end gap-10">
           <Link
             to={`/edit/${post._id}`}

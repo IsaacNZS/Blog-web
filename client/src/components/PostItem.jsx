@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, loading }) => {
   return (
     <div className="flex flex-col mb-4">
+      {loading && <p>Post Loading...</p>}
       <Link to={`/post/${post._id}`}>
         <div className="mb-2">
           <h1 className="text-3xl font-bold">{post.title}</h1>

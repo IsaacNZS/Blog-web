@@ -63,6 +63,7 @@ const login = async (req, res, next) => {
       con: true,
       msg: "You Successfully logined!",
       id: username.id,
+      name: username.name,
     });
   } catch (error) {
     console.log(error);

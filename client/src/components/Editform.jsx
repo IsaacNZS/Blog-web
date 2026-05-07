@@ -7,6 +7,7 @@ const Editform = ({ uiTitle, uiBtn }) => {
   const [title, setTitle] = useState();
   const [img, setImg] = useState();
   const [des, setDes] = useState();
+  const [loading, setLoading] = useState(false);
   const { userInfo } = useContext(UserContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,30 +19,48 @@ const Editform = ({ uiTitle, uiBtn }) => {
   }, []);
 
   const createpost = async () => {
-    const formData = new FormData();
-    formData.append(
-      "data",
-      JSON.stringify({
-        title,
-        des,
-      }),
-    );
-    formData.append("file", img);
+    try {
+      setLoading(true);
 
-    const res = await fetch(
-      `${import.meta.env.VITE_URL}/user/post/${userInfo?.id}`,
-      {
-        credentials: "include",
-        method: "POST",
-        body: formData,
-      },
-    );
-    const data = await res.json();
-    if (res.ok) {
-      navigate("/");
-      alert(data.msg);
-    } else {
-      alert(data.msg);
+      const formData = new FormData();
+
+      if (!img) {
+        alert("Please select image");
+        setLoading(false);
+        return;
+      }
+
+      formData.append(
+        "data",
+        JSON.stringify({
+          title,
+          des,
+        }),
+      );
+
+      formData.append("file", img);
+
+      const res = await fetch(
+        `${import.meta.env.VITE_URL}/user/post/${userInfo?.id}`,
+        {
+          credentials: "include",
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.msg);
+        navigate("/");
+      } else {
+        alert(data.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,8 +154,11 @@ const Editform = ({ uiTitle, uiBtn }) => {
               setDes(e.target.value);
             }}
           />
-          <button className="border-2 w-full bg-black text-white px-3 text-center py-1">
-            {uiBtn}
+          <button
+            className="border-2 w-full bg-black text-white px-3 text-center py-1"
+            disabled={loading}
+          >
+            {loading ? "Uploading..." : uiBtn}
           </button>
         </div>
       </form>

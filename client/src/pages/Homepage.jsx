@@ -6,8 +6,10 @@ import { UserContext } from "../../Context";
 
 const Homepage = () => {
   const { allpost, setAllpost } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const user = async () => {
     try {
+      setLoading(true);
       const res = await fetch(`${import.meta.env.VITE_URL}/user/posts`);
       if (!res.ok) {
         return alert("Somgthing Wrong!");
@@ -16,6 +18,8 @@ const Homepage = () => {
       setAllpost(data.result);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -25,7 +29,7 @@ const Homepage = () => {
   return (
     <>
       {allpost.map((page) => (
-        <PostItem post={page} key={page._id} />
+        <PostItem post={page} key={page._id} loading={loading} />
       ))}
     </>
   );

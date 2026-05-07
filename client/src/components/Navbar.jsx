@@ -34,14 +34,21 @@ function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between p-7">
-      <div className="flex flex-col gap-1">
-        <Link to={"/"} className="text-3xl font-bold sm:text-5xl">
-          Isaac.zls
-        </Link>
-        <p className="text-sm font-bold sm:text-lg">
-          Welcome - {userInfo ? userInfo.name : "Guest"}
-        </p>
+    <nav className="flex items-center justify-between pb-5 pt-2 px-2 sm:p-7">
+      <div className="flex gap-1">
+        <img
+          src="/public/logo-removebg-preview.png"
+          className="w-16 h-16"
+          alt=""
+        />
+        <div className="flex flex-col gap-1">
+          <Link to={"/"} className="text-3xl font-bold sm:text-5xl">
+            Isaac.zls
+          </Link>
+          <p className="text-sm font-bold sm:text-lg">
+            Welcome - {userInfo ? userInfo.name : "Guest"}
+          </p>
+        </div>
       </div>
       <div className="flex justify-between items-center gap-2 sm:gap-7">
         {userInfo ? (
