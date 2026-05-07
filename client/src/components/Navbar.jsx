@@ -1,9 +1,34 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context";
 
 function Navbar() {
   const { userInfo, setUserInfo } = useContext(UserContext);
+  const [show, setShow] = useState(true);
+  const [lastScroll, setLastScroll] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let currentScroll = window.scrollY;
+
+      if (currentScroll > lastScroll) {
+        // down scroll
+        setShow(false);
+      } else {
+        // up scroll
+        setShow(true);
+      }
+
+      setLastScroll(currentScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScroll]);
+
   const getUserData = async () => {
     const res = await fetch(`${import.meta.env.VITE_URL}/user/profile`, {
       credentials: "include",
@@ -34,7 +59,11 @@ function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between pb-5 pt-2 px-2 sm:p-7">
+    <nav
+      className={`fixed w-full z-50 flex bg-[#f2fcfe] items-center justify-between p-2 sm:p-7 transition-transform duration-300 ${
+        show ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="flex gap-1">
         <img src="/logo-removebg-preview.png" className="w-16 h-16" alt="" />
         <div className="flex flex-col gap-1">

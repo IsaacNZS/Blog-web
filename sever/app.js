@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://isaac-zls-blog.onrender.com",
+    origin: "http://localhost:5173",
   }),
 );
 app.use("/user", router);

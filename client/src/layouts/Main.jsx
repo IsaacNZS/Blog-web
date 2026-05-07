@@ -5,7 +5,7 @@ function Main() {
   return (
     <div>
       <Navbar />
-      <section className="px-7">
+      <section className="px-7 pt-23 min-h-screen">
         <Outlet />
       </section>
     </div>
