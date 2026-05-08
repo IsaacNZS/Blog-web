@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { redirect, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context";
+import { socket } from "../socket";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
@@ -41,6 +42,8 @@ const Auth = () => {
     if (res.ok) {
       setUserInfo(data);
       alert(data.msg);
+      socket.emit("user-online", data.name);
+      localStorage.setItem("user", JSON.stringify(data.name));
       navigate("/");
     } else {
       alert(data.msg);

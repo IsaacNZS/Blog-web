@@ -5,3 +5,5 @@ export const socket = io("https://blog-web-3l1s.onrender.com", {
   reconnection: true,
   transports: ["websocket"],
 });
+
+// https://blog-web-3l1s.onrender.com

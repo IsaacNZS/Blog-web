@@ -6,23 +6,8 @@ import { UserContext } from "../../Context";
 import { socket } from "../socket";
 
 const Homepage = () => {
-  const { allpost, setAllpost, online, setOnline } = useContext(UserContext);
+  const { allpost, setAllpost } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    socket.on("connect", () => {
-      setOnline(true);
-    });
-
-    socket.on("disconnect", () => {
-      setOnline(false);
-    });
-
-    return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-    };
-  }, []);
 
   const user = async () => {
     try {

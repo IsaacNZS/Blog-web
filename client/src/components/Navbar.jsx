@@ -84,6 +84,9 @@ function Navbar() {
       <div className="flex justify-between items-center gap-2 sm:gap-7">
         {userInfo ? (
           <>
+            <Link to="/search">
+              <i className="fa-solid text-[#ab7d09] fa-magnifying-glass"></i>
+            </Link>
             <Link
               to={"/post-create"}
               className=" text-[11px] font-bold sm:text-lg px-2 py-1 text-nowrap text-[#ab7d09] bg-black rounded-[5px]"

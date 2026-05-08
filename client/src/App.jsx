@@ -9,21 +9,15 @@ import Myprofile from "./pages/Myprofile";
 import { UserContextprovider } from "../Context";
 import { useEffect } from "react";
 import { socket } from "./socket";
+import SearchContainer from "./pages/Search";
 
 function App() {
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log("connected:", socket.id);
-    });
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    socket.on("disconnect", (reason) => {
-      console.log("disconnected:", reason);
-    });
-
-    return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-    };
+    if (user) {
+      socket.emit("user-online", user);
+    }
   }, []);
 
   useEffect(() => {
@@ -57,6 +51,10 @@ function App() {
         {
           path: "/my-profile/:name",
           element: <Myprofile />,
+        },
+        {
+          path: "/search",
+          element: <SearchContainer />,
         },
       ],
     },

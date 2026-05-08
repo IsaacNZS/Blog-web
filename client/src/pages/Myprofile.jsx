@@ -10,7 +10,8 @@ const Myprofile = () => {
   const [loading, setLoading] = useState(false);
   const [openImg, setOpenImg] = useState(false);
   const { name } = useParams();
-  const { online } = useContext(UserContext);
+  const { onlineUsers } = useContext(UserContext);
+  const isOnline = onlineUsers.includes(allpost[0]?.author);
 
   const user = async () => {
     try {
@@ -66,7 +67,7 @@ const Myprofile = () => {
             alt=""
             onClick={() => setOpenImg(true)}
           />
-          {online ? (
+          {isOnline ? (
             <span className=" absolute bottom-1 right-2 w-6 h-6 bg-green-500 border-2 border-black rounded-full"></span>
           ) : (
             <span className="absolute bottom-1 right-2 w-6 h-6 bg-gray-500 border-2 border-black rounded-full"></span>
