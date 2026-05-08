@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:3000", {
+export const socket = io("https://blog-web-3l1s.onrender.com", {
   autoConnect: true,
   reconnection: true,
   transports: ["websocket"],
