@@ -187,6 +187,12 @@ const deletepost = async (req, res) => {
   }
 };
 
+const myitems = async (req, res) => {
+  let name = req.params.name;
+  const myposts = await postDB.find({ author: name }).sort({ time: -1 });
+  res.status(200).json({ con: true, msg: "My posts", result: myposts });
+};
+
 module.exports = {
   registor,
   login,
@@ -197,4 +203,5 @@ module.exports = {
   old,
   editpost,
   deletepost,
+  myitems,
 };

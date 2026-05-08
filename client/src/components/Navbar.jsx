@@ -67,12 +67,18 @@ function Navbar() {
       <div className="flex gap-1">
         <img src="/logo-removebg-preview.png" className="w-16 h-16" alt="" />
         <div className="flex flex-col gap-1">
-          <Link to={"/"} className="text-3xl font-bold sm:text-5xl">
+          <Link
+            to={"/"}
+            className="text-3xl font-bold text-[#ab7d09] sm:text-5xl"
+          >
             Isaac.zls
           </Link>
-          <p className="text-sm font-bold sm:text-lg">
+          <Link
+            to={userInfo ? `/my-profile/${userInfo.name}` : "/auth?mode=login"}
+            className="text-sm font-bold sm:text-lg"
+          >
             Welcome - {userInfo ? userInfo.name : "Guest"}
-          </p>
+          </Link>
         </div>
       </div>
       <div className="flex justify-between items-center gap-2 sm:gap-7">
@@ -80,13 +86,13 @@ function Navbar() {
           <>
             <Link
               to={"/post-create"}
-              className="border-2 text-[11px] sm:text-lg px-2 py-1 text-white text-nowrap bg-black rounded-[5px]"
+              className=" text-[11px] font-bold sm:text-lg px-2 py-1 text-nowrap text-[#ab7d09] bg-black rounded-[5px]"
             >
               Create Post
             </Link>
             <Link
               onClick={logout}
-              className="border-2 text-[10px] sm:text-lg px-3 py-[2.5px] rounded-[5px]"
+              className="border-2 text-[10px] font-bold text-[#ab7d09] sm:text-lg px-3 py-[2.5px] rounded-[5px]"
             >
               Logout
             </Link>
@@ -95,15 +101,15 @@ function Navbar() {
           <>
             <Link
               to={"/auth?mode=login"}
-              className="border-2 text-[10px] sm:text-lg px-3 py-1 text-white bg-black rounded-[5px]"
+              className=" text-[11px] font-bold sm:text-lg px-3 py-1 text-[#ab7d09] bg-black rounded-[5px]"
             >
               Login
             </Link>
             <Link
               to={"/auth?mode=register"}
-              className="border-2 text-[10px] sm:text-lg px-3 py-[2.5px] rounded-[5px]"
+              className="border-2 text-[10px] font-bold text-[#ab7d09] sm:text-lg px-3 py-[2.5px] rounded-[5px]"
             >
-              Registor
+              Register
             </Link>
           </>
         )}

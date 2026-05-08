@@ -5,8 +5,30 @@ import Homepage from "./pages/Homepage";
 import Detailpage from "./pages/Detailpage";
 import Editpage from "./pages/Editpage";
 import Createpage from "./pages/Createpage";
+import Myprofile from "./pages/Myprofile";
 import { UserContextprovider } from "../Context";
+import { useEffect } from "react";
+import { socket } from "./socket";
+
 function App() {
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("connected:", socket.id);
+    });
+
+    socket.on("disconnect", (reason) => {
+      console.log("disconnected:", reason);
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("disconnect");
+    };
+  }, []);
+
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+  }, []);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -31,6 +53,10 @@ function App() {
         {
           path: "/post-create",
           element: <Createpage />,
+        },
+        {
+          path: "/my-profile/:name",
+          element: <Myprofile />,
         },
       ],
     },

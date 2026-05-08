@@ -7,6 +7,7 @@ const Detailpage = ({}) => {
   const navigate = useNavigate();
   const [allpost, setAllpost] = useState([]);
   const { userInfo } = useContext(UserContext);
+  const [openImg, setOpenImg] = useState(false);
   const { id } = useParams();
 
   const fetchPosts = async () => {
@@ -63,7 +64,7 @@ const Detailpage = ({}) => {
               {new Date(post.time).toLocaleString()}
             </p>
           </div>
-          <Link to={"/"} replace>
+          <button onClick={() => navigate(-1)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -78,11 +79,24 @@ const Detailpage = ({}) => {
                 d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
               />
             </svg>
-          </Link>
+          </button>
         </div>
 
-        <img className="w-full my-3 h-auto " src={post.img} alt="" />
+        <img
+          className="w-full my-3 h-auto "
+          src={post.img}
+          alt=""
+          onClick={() => setOpenImg(true)}
+        />
         <p className="text-justify">{post.des}</p>
+        {openImg && (
+          <div
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+            onClick={() => setOpenImg(false)}
+          >
+            <img src={post.img} alt="" className="max-w-[90%] max-h-[90%]" />
+          </div>
+        )}
       </div>
       {userInfo?.name === post.author && (
         <div className="flex justify-end gap-10">

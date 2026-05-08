@@ -12,5 +12,6 @@ router.put("/posts-edit/:id", saveimg, controller.editpost);
 router.delete("/posts-edit/:id", controller.deletepost);
 router.get("/posts", controller.showallposts);
 router.get("/posts-edit/:id", controller.old);
+router.get("/myitem/:name", controller.myitems);
 
 module.exports = router;
