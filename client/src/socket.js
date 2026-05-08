@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export const socket = io(`${import.meta.env.VITE_URL}`, {
+export const socket = io("https://blog-web-3l1s.onrender.com", {
   autoConnect: true,
   reconnection: true,
   transports: ["websocket"],
