@@ -13,5 +13,7 @@ router.delete("/posts-edit/:id", controller.deletepost);
 router.get("/posts", controller.showallposts);
 router.get("/posts-edit/:id", controller.old);
 router.get("/myitem/:name", controller.myitems);
+router.get("/allusers", controller.alluser);
+router.get("/finduser/:name", controller.finduser);
 
 module.exports = router;

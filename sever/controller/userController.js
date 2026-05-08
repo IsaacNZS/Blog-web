@@ -193,6 +193,60 @@ const myitems = async (req, res) => {
   res.status(200).json({ con: true, msg: "My posts", result: myposts });
 };
 
+const alluser = async (req, res) => {
+  const allusers = await usersDB.find();
+  const allposts = await postDB.find().sort({ time: -1 });
+
+  const result = allusers.map((user) => {
+    const profile = allposts.find(
+      (p) =>
+        p.author === user.name &&
+        (p.title === "PROFILE" ||
+          p.title === "Profile" ||
+          p.title === "profile"),
+    );
+    return {
+      ...user._doc,
+      img: profile?.img || null,
+    };
+  });
+  res.status(200).json({
+    con: true,
+    msg: "All users",
+    result: result,
+  });
+};
+
+const finduser = async (req, res) => {
+  let name = req.params.name;
+  const user = await usersDB.findOne({ name });
+  const userPosts = await postDB.find({ author: name }).sort({ time: -1 });
+  if (!user) {
+    return res.status(404).json({
+      con: false,
+      msg: "User not found",
+    });
+  }
+  const result = [user].map((user) => {
+    const profile = userPosts.find(
+      (p) =>
+        p.author === user.name &&
+        (p.title === "PROFILE" ||
+          p.title === "Profile" ||
+          p.title === "profile"),
+    );
+    return {
+      ...user._doc,
+      img: profile?.img || null,
+    };
+  });
+  res.status(200).json({
+    con: true,
+    msg: "All users",
+    result: result,
+  });
+};
+
 module.exports = {
   registor,
   login,
@@ -204,4 +258,6 @@ module.exports = {
   editpost,
   deletepost,
   myitems,
+  alluser,
+  finduser,
 };

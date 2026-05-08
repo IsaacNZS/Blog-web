@@ -38,11 +38,29 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("user online:", socket.id);
+let onlineUsers = [];
 
-  socket.on("disconnect", (reason) => {
-    console.log("user offline:", reason);
+io.on("connection", (socket) => {
+  console.log("user connected");
+
+  socket.on("user-online", (userId) => {
+    socket.userId = userId;
+
+    if (!onlineUsers.includes(userId)) {
+      onlineUsers.push(userId);
+    }
+
+    io.emit("online-users", onlineUsers);
+
+    console.log(onlineUsers);
+  });
+
+  socket.on("disconnect", () => {
+    onlineUsers = onlineUsers.filter((id) => id !== socket.userId);
+
+    io.emit("online-users", onlineUsers);
+
+    console.log("disconnect");
   });
 });
 
