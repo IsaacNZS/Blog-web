@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://isaac-zls-blog.onrender.com",
+    origin: "http://localhost:5173",
   }),
 );
 
@@ -32,7 +32,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://isaac-zls-blog.onrender.com",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST"],
   },
