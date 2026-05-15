@@ -218,32 +218,42 @@ const alluser = async (req, res) => {
 };
 
 const finduser = async (req, res) => {
-  let name = req.params.name;
-  const user = await usersDB.findOne({ name });
-  const userPosts = await postDB.find({ author: name }).sort({ time: -1 });
-  if (!user) {
+  const name = req.params.name;
+
+  const users = await usersDB.find({
+    name: { $regex: name, $options: "i" },
+  });
+
+  if (!users.length) {
     return res.status(404).json({
       con: false,
       msg: "User not found",
     });
   }
-  const result = [user].map((user) => {
-    const profile = userPosts.find(
-      (p) =>
-        p.author === user.name &&
-        (p.title === "PROFILE" ||
-          p.title === "Profile" ||
-          p.title === "profile"),
-    );
-    return {
-      ...user._doc,
-      img: profile?.img || null,
-    };
-  });
+
+  const result = await Promise.all(
+    users.map(async (user) => {
+      const userPosts = await postDB
+        .find({ author: user.name })
+        .sort({ time: -1 });
+
+      const profile = userPosts.find(
+        (p) =>
+          p.author === user.name &&
+          ["PROFILE", "Profile", "profile"].includes(p.title),
+      );
+
+      return {
+        ...user._doc,
+        img: profile?.img || null,
+      };
+    }),
+  );
+
   res.status(200).json({
     con: true,
-    msg: "All users",
-    result: result,
+    msg: "Users found",
+    result,
   });
 };
 

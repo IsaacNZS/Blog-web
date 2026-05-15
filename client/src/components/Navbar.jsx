@@ -60,7 +60,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 flex bg-[#f2fcfe] items-center justify-between p-2 sm:p-7 transition-transform duration-300 ${
+      className={`fixed w-full z-50 flex bg-[#bcbea9] items-center justify-between p-2 sm:p-7 transition-transform duration-300 ${
         show ? "translate-y-0" : "-translate-y-full"
       }`}
     >

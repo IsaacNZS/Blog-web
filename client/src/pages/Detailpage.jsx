@@ -28,7 +28,9 @@ const Detailpage = ({}) => {
   }, []);
 
   if (allpost.length === 0) {
-    return <p>Loading...</p>;
+    return (
+      <img src="/loading.gif" className="w-16 h-16 mx-auto" alt="Loading" />
+    );
   }
   const post = allpost.find((p) => p._id === id);
   const deletePost = async () => {
@@ -54,11 +56,11 @@ const Detailpage = ({}) => {
   };
 
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex bg-[#262626] py-1 px-3 rounded-[5px] flex-col mb-4">
       <div className="mb-2">
         <div className="flex justify-between">
           <div>
-            <h1 className="text-3xl font-bold">{post.title}</h1>
+            <h1 className="text-3xl text-white font-bold">{post.title}</h1>
             <p className="text-gray-500">
               <span>{post.author}</span> |{" "}
               {new Date(post.time).toLocaleString()}
@@ -71,7 +73,7 @@ const Detailpage = ({}) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-8"
+              className="text-white size-8"
             >
               <path
                 strokeLinecap="round"
@@ -88,7 +90,7 @@ const Detailpage = ({}) => {
           alt=""
           onClick={() => setOpenImg(true)}
         />
-        <p className="text-justify">{post.des}</p>
+        <p className="text-white text-justify">{post.des}</p>
         {openImg && (
           <div
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
