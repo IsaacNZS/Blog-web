@@ -50,7 +50,7 @@ const login = async (req, res, next) => {
       { id: username._id, name: username.name },
       process.env.SCREAT_KEY,
       {
-        expiresIn: "3d",
+        expiresIn: 60 * 60 * 60 * 72,
       },
     );
     res.cookie("token", token, {

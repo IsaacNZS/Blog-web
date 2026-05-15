@@ -7,3 +7,4 @@ export const socket = io("https://blog-web-3l1s.onrender.com", {
 });
 
 // https://blog-web-3l1s.onrender.com
+// http://localhost:3000

@@ -61,9 +61,11 @@ const Auth = () => {
 
   const isLoginMode = searchParams.get("mode") === "login";
   return (
-    <section className="w-[90%] sm:w-1/2 mx-auto">
-      <br />
-      <h1 className="text-3xl font-bold text-center">
+    <section
+      className="bg-[#82641a] rounded-2xl
+    px-4 py-6 w-[90%] h-[50%] sm:w-1/2 mx-auto"
+    >
+      <h1 className="text-3xl mt-[20px] font-bold text-center">
         {isLoginMode ? "Login" : "Register"} Form
       </h1>
       <br />
@@ -97,7 +99,8 @@ const Auth = () => {
             }}
           />
         </div>
-        <button className="border-2-black px-3 py-1 text-white w-full rounded-[5px] bg-black mt-5">
+        <br />
+        <button className="border-2-black px-3 py-1 text-[#82641a] w-full rounded-[5px] bg-black mt-5">
           {isLoginMode ? "Login" : "Register"} Account
         </button>
       </form>

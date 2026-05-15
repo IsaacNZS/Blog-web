@@ -119,8 +119,11 @@ const Editform = ({ uiTitle, uiBtn }) => {
     }
   };
   return (
-    <section className="w-[96%] sm:w-1/2 mx-auto">
-      <h1 className="text-2xl mt-5 font-bold">{uiTitle}</h1>
+    <section
+      className="bg-[#82641a] rounded-2xl
+    px-4 py-6 w-[96%] sm:w-1/2 mx-auto"
+    >
+      <h1 className="text-3xl mt-5 font-bold">{uiTitle}</h1>
       <br />
       <form onSubmit={uploadPost} method="POST">
         <div className="flex flex-col gap-1">
@@ -155,7 +158,7 @@ const Editform = ({ uiTitle, uiBtn }) => {
             }}
           />
           <button
-            className="border-2 w-full bg-black text-white px-3 text-center py-1"
+            className="border-2 w-full bg-black text-white px-3 mt-2 text-center py-1"
             disabled={loading}
           >
             {loading ? "Uploading..." : uiBtn}
