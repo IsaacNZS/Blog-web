@@ -65,7 +65,7 @@ const Auth = () => {
       className="bg-[#82641a] rounded-2xl
     px-4 py-6 w-[90%] h-[50%] sm:w-1/2 mx-auto"
     >
-      <h1 className="text-3xl mt-[20px] font-bold text-center">
+      <h1 className="text-3xl mt-3 font-bold text-center">
         {isLoginMode ? "Login" : "Register"} Form
       </h1>
       <br />

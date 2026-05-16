@@ -1,5 +1,6 @@
 const usersDB = require("../model/userModel");
 const postDB = require("../model/postModel");
+const commentDB = require("../model/commet");
 const { Encoder } = require("../utils/core");
 const JWT = require("jsonwebtoken");
 
@@ -122,7 +123,25 @@ const crepost = async (req, res) => {
 
 const showallposts = async (req, res) => {
   const allposts = await postDB.find().sort({ time: -1 });
-  res.status(200).json({ con: true, msg: "All posts", result: allposts });
+
+  const postsWithComments = await Promise.all(
+    allposts.map(async (post) => {
+      const commentCount = await commentDB.countDocuments({
+        postId: post._id,
+      });
+
+      return {
+        ...post._doc,
+        commentCount,
+      };
+    }),
+  );
+
+  res.status(200).json({
+    con: true,
+    msg: "All posts",
+    result: postsWithComments,
+  });
 };
 
 const old = async (req, res) => {
@@ -257,6 +276,31 @@ const finduser = async (req, res) => {
   });
 };
 
+const react = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const userId = req.params.userid;
+    const { type } = req.body;
+    const newReaction = new reactModel({
+      postId,
+      userId,
+      type,
+    });
+
+    await newReaction.save();
+
+    res.status(200).json({
+      con: true,
+      msg: "Reaction added successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      con: false,
+      msg: "Server error",
+    });
+  }
+};
+
 module.exports = {
   registor,
   login,
@@ -270,4 +314,5 @@ module.exports = {
   myitems,
   alluser,
   finduser,
+  react,
 };

@@ -3,7 +3,10 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 
-const router = require("./routers/userRputer");
+const userrouter = require("./routers/userRputer");
+const commentroute = require("./routers/commentRouter");
+const reactroute = require("./routers/reactrouter");
+
 const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
@@ -25,7 +28,9 @@ app.use(
   }),
 );
 
-app.use("/user", router);
+app.use("/comment", commentroute);
+app.use("/react/", reactroute);
+app.use("/user", userrouter);
 app.use(express.static("public"));
 
 const server = http.createServer(app);

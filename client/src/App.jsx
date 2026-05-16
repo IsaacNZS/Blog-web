@@ -37,10 +37,6 @@ function App() {
           element: <Authpage />,
         },
         {
-          path: "/post/:id",
-          element: <Detailpage />,
-        },
-        {
           path: "/edit/:id",
           element: <Editpage />,
         },
@@ -55,6 +51,10 @@ function App() {
         {
           path: "/search",
           element: <SearchContainer />,
+        },
+        {
+          path: "/user/:userId/post/:id",
+          element: <Detailpage />,
         },
       ],
     },
