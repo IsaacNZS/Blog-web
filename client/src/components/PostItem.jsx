@@ -63,18 +63,18 @@ const PostItem = ({ post, loading }) => {
         add("Like");
         setTimeout(() => {
           get();
-        }, 50);
+        }, 500);
       } else {
         add("Heart");
         setTimeout(() => {
           get();
-        }, 50);
+        }, 500);
       }
     } else {
       del();
       setTimeout(() => {
         get();
-      }, 50);
+      }, 500);
     }
   };
   return (
@@ -106,42 +106,43 @@ const PostItem = ({ post, loading }) => {
             <p className="text-blue-500">Read More...</p>
           </div>
         </Link>
-        <div className="flex justify-between">
-          {" "}
-          <Link
-            to={`/user/${userInfo ? userInfo.id : ""}/post/${post._id}`}
-            className="text-[#ab7d09] ml-1 text-[20px]"
-          >
-            <i className="fa-solid fa-comment-dots">
-              <span> x {post.commentCount}</span>
-            </i>
-          </Link>
-          {react.length === 0 ? (
-            <i
-              onClick={() => {
-                (controller(), setlike(false));
-              }}
-              className="fa-solid text-[23px] text-[#514d4d] fa-heart"
+        {userInfo && (
+          <div className="flex justify-between">
+            {" "}
+            <Link
+              to={`/user/${userInfo ? userInfo.id : ""}/post/${post._id}`}
+              className="text-[#ab7d09] ml-1 text-[20px]"
             >
-              <span className="text-[20px] text-amber-200">
-                {" "}
-                x {react.length}
-              </span>
-            </i>
-          ) : (
-            <i
-              onClick={() => {
-                (controller(), setlike(false));
-              }}
-              className="fa-solid text-[23px] text-red-500 fa-heart"
-            >
-              <span className="text-[20px] text-amber-200">
-                {" "}
-                x {react.length}
-              </span>
-            </i>
-          )}
-          {/* <i
+              <i className="fa-solid fa-comment-dots">
+                <span> x {post.commentCount}</span>
+              </i>
+            </Link>
+            {react.length === 0 ? (
+              <i
+                onClick={() => {
+                  (controller(), setlike(false));
+                }}
+                className="fa-solid text-[23px] text-[#514d4d] fa-heart"
+              >
+                <span className="text-[20px] text-amber-200">
+                  {" "}
+                  x {react.length}
+                </span>
+              </i>
+            ) : (
+              <i
+                onClick={() => {
+                  (controller(), setlike(false));
+                }}
+                className="fa-solid text-[23px] text-red-500 fa-heart"
+              >
+                <span className="text-[20px] text-amber-200">
+                  {" "}
+                  x {react.length}
+                </span>
+              </i>
+            )}
+            {/* <i
           onClick={() => {
             (controller(), setlike(true));
           }}
@@ -149,7 +150,8 @@ const PostItem = ({ post, loading }) => {
         >
           <span className="text-[20px] text-amber-200"> x {react.length}</span>
         </i> */}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

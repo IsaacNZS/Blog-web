@@ -63,18 +63,18 @@ const MyItem = ({ post, loading }) => {
         add("Like");
         setTimeout(() => {
           get();
-        }, 50);
+        }, 500);
       } else {
         add("Heart");
         setTimeout(() => {
           get();
-        }, 50);
+        }, 500);
       }
     } else {
       del();
       setTimeout(() => {
         get();
-      }, 50);
+      }, 500);
     }
   };
   return (
